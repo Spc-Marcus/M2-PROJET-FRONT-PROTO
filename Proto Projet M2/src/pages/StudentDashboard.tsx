@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
-import { ClassroomDto } from '../types';
+import type { ClassroomDto } from '../types';
 
 export const StudentDashboard = () => {
   const [classrooms, setClassrooms] = useState<ClassroomDto[]>([]);
   const [joinCode, setJoinCode] = useState('');
-  const [selectedClassroom, setSelectedClassroom] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

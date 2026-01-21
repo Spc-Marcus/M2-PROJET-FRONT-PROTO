@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiService } from '../services/api';
-import { LeitnerBoxesStatusDto, LeitnerSessionStartResponseDto, LeitnerSessionResultDto, SubmitAnswerDto } from '../types';
+import type { LeitnerBoxesStatusDto, LeitnerSessionStartResponseDto, LeitnerSessionResultDto, SubmitAnswerDto } from '../types';
 
 export const LeitnerPage = () => {
   const { classroomId } = useParams<{ classroomId: string }>();

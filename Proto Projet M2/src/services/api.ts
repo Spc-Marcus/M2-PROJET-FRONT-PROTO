@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosError } from 'axios';
-import { 
+import axios, { type AxiosInstance, AxiosError } from 'axios';
+import type { 
   AuthRequestDto, 
   RegisterStudentDto, 
   UserResponseDto,

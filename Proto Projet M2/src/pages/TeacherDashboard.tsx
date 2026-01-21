@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
-import { ClassroomDto, Level } from '../types';
+import type { ClassroomDto, Level } from '../types';
 
 export const TeacherDashboard = () => {
   const [classrooms, setClassrooms] = useState<ClassroomDto[]>([]);

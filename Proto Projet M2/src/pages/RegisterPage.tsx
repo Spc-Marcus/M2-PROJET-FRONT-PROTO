@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { Level } from '../types';
+import type { Level } from '../types';
 
 export const RegisterPage = () => {
   const [email, setEmail] = useState('');

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiService } from '../services/api';
-import { GameSessionStartDto, QuestionResponseDto, SubmitAnswerDto, SessionResultDto } from '../types';
+import type { GameSessionStartDto, QuestionResponseDto, SubmitAnswerDto, SessionResultDto } from '../types';
 
 export const QuizSessionPage = () => {
   const { quizId } = useParams<{ quizId: string }>();

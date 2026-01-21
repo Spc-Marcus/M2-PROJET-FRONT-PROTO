@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
-import { UserResponseDto } from '../types';
+import type { UserResponseDto } from '../types';
 
 export const useAuth = () => {
   const [user, setUser] = useState<UserResponseDto | null>(null);

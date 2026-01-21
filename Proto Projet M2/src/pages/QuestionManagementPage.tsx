@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiService } from '../services/api';
-import { QuestionCreateDto, QuestionType, QuestionOption } from '../types';
+import type { QuestionCreateDto, QuestionType, QuestionOption } from '../types';
 
 export const QuestionManagementPage = () => {
   const { quizId } = useParams<{ quizId: string }>();

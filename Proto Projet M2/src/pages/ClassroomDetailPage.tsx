@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiService } from '../services/api';
-import { ClassroomDto, ModuleDto, QuizDto } from '../types';
+import type { ClassroomDto, ModuleDto, QuizDto } from '../types';
 
 export const ClassroomDetailPage = () => {
   const { id } = useParams<{ id: string }>();
