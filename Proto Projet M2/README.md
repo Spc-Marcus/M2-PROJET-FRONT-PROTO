@@ -1,73 +1,221 @@
-# React + TypeScript + Vite
+# Duobingo - Prototype Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A functional prototype of the Duobingo educational platform frontend, built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Duobingo is a learning management system similar to Duolingo, designed for educational institutions. This prototype includes:
 
-## React Compiler
+- **Authentication**: Login and registration for students
+- **Student Features**:
+  - Browse and join classrooms
+  - View modules and quizzes
+  - Take quizzes with various question types (QCM, True/False, Text, Image)
+  - Leitner spaced repetition system for review
+  - Progress tracking
+  
+- **Teacher Features**:
+  - Create and manage classrooms
+  - Create modules and quizzes
+  - Create questions with multiple types
+  - Manage classroom access codes
+  - View student progress
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **React Router DOM** - Client-side routing
+- **Axios** - HTTP client for API requests
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 18+ and npm
+- Backend API running on `http://localhost:8000`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Navigate to the project directory:
+```bash
+cd "Proto Projet M2"
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+## Configuration
+
+The API base URL is configured in `src/services/api.ts`:
+```typescript
+const API_BASE_URL = 'http://localhost:8000/api';
+```
+
+Update this URL if your backend API runs on a different port or domain.
+
+## Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## Building for Production
+
+Build the application:
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+Preview the production build:
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/       # Reusable UI components (future)
+├── hooks/           # Custom React hooks
+│   └── useAuth.ts   # Authentication hook
+├── pages/           # Page components
+│   ├── LoginPage.tsx
+│   ├── RegisterPage.tsx
+│   ├── StudentDashboard.tsx
+│   ├── TeacherDashboard.tsx
+│   ├── ClassroomDetailPage.tsx
+│   ├── QuizSessionPage.tsx
+│   ├── LeitnerPage.tsx
+│   ├── TeacherClassroomPage.tsx
+│   └── QuestionManagementPage.tsx
+├── services/        # API service layer
+│   └── api.ts       # API client with all endpoints
+├── types/           # TypeScript type definitions
+│   └── index.ts     # DTO types from API documentation
+├── App.tsx          # Main app component with routing
+└── main.tsx         # Application entry point
+```
+
+## API Integration
+
+The application is fully integrated with the backend API documented in `/doc/endpoints.md` and `/doc/dto.md`.
+
+All endpoints are implemented in `src/services/api.ts`:
+- Authentication & Users
+- Classrooms
+- Modules
+- Quizzes
+- Questions
+- Game Sessions
+- Leitner System
+- Stats & Progress
+
+## User Flows
+
+### Student Flow
+1. Register/Login
+2. View available classrooms or join with code
+3. Browse modules and quizzes
+4. Take quizzes (various question types supported)
+5. Review with Leitner system
+6. Track progress
+
+### Teacher Flow
+1. Login
+2. Create classroom
+3. Add modules to classroom
+4. Create quizzes in modules
+5. Add questions to quizzes
+6. Share classroom code with students
+7. Monitor student progress
+
+## Question Types Supported
+
+- **QCM (Multiple Choice)**: Multiple options with one or more correct answers
+- **VRAI_FAUX (True/False)**: Binary choice questions
+- **TEXT**: Free text input with answer validation
+- **IMAGE**: Click on specific zones in an image
+- **MATCHING**: Match items from two lists (simplified in prototype)
+
+## Authentication
+
+The app uses JWT token authentication:
+- Token is stored in `localStorage`
+- Automatically added to all API requests via Axios interceptor
+- Automatic redirect to login on 401 responses
+
+## Troubleshooting
+
+### CORS Error when connecting to backend
+
+**Issue**: You see an error like:
+```
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:8000/api/...
+Reason: CORS header 'Access-Control-Allow-Origin' is missing
+```
+
+**Solution**: This is a backend configuration issue. The backend needs to enable CORS to accept requests from the frontend origin (`http://localhost:5173`).
+
+**Backend Configuration Required:**
+
+For a Node.js/Express backend:
+```javascript
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+```
+
+For Spring Boot backend:
+```java
+@Configuration
+public class CorsConfig {
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**")
+                    .allowedOrigins("http://localhost:5173")
+                    .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
+            }
+        };
+    }
+}
+```
+
+For production, update the allowed origin to match your frontend deployment URL.
+
+### Backend not running
+
+Make sure the backend API is running on port 8000 before starting the frontend. You can test if it's accessible by visiting `http://localhost:8000/api` in your browser.
+
+## Future Enhancements
+
+- Statistics dashboard for teachers
+- Student management (enroll, remove)
+- Leaderboard display
+- Progress visualization
+- Media upload for questions
+- Export quiz results
+- Admin panel
+
+## API Documentation
+
+Full API documentation is available in:
+- `/doc/endpoints.md` - All API endpoints
+- `/doc/dto.md` - Data transfer objects
+
+## License
+
+This is a prototype for educational purposes.
