@@ -151,6 +151,55 @@ The app uses JWT token authentication:
 - Automatically added to all API requests via Axios interceptor
 - Automatic redirect to login on 401 responses
 
+## Troubleshooting
+
+### CORS Error when connecting to backend
+
+**Issue**: You see an error like:
+```
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:8000/api/...
+Reason: CORS header 'Access-Control-Allow-Origin' is missing
+```
+
+**Solution**: This is a backend configuration issue. The backend needs to enable CORS to accept requests from the frontend origin (`http://localhost:5173`).
+
+**Backend Configuration Required:**
+
+For a Node.js/Express backend:
+```javascript
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+```
+
+For Spring Boot backend:
+```java
+@Configuration
+public class CorsConfig {
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**")
+                    .allowedOrigins("http://localhost:5173")
+                    .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
+            }
+        };
+    }
+}
+```
+
+For production, update the allowed origin to match your frontend deployment URL.
+
+### Backend not running
+
+Make sure the backend API is running on port 8000 before starting the frontend. You can test if it's accessible by visiting `http://localhost:8000/api` in your browser.
+
 ## Future Enhancements
 
 - Statistics dashboard for teachers
