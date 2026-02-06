@@ -58,7 +58,7 @@ export const useFinishLeitnerSession = () => {
 
   return useMutation({
     mutationFn: leitnerService.finishLeitnerSession,
-    onSuccess: (data, sessionId) => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['leitner', 'status'] });
       queryClient.invalidateQueries({ queryKey: ['statistics'] });
       queryClient.invalidateQueries({ queryKey: ['progress'] });

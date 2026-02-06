@@ -7,11 +7,13 @@ import { type QuestionType } from './question.types';
 /**
  * Session status enumeration
  */
-export enum SessionStatus {
-  IN_PROGRESS = 'IN_PROGRESS',
-  COMPLETED = 'COMPLETED',
-  ABANDONED = 'ABANDONED'
-}
+export const SessionStatus = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  ABANDONED: 'ABANDONED'
+} as const;
+
+export type SessionStatus = typeof SessionStatus[keyof typeof SessionStatus];
 
 /**
  * Option for session questions (without correct answer)
@@ -43,7 +45,7 @@ interface BaseSessionQuestion {
  * Session QCM/VRAI_FAUX question
  */
 export interface SessionQcmQuestion extends BaseSessionQuestion {
-  type: QuestionType.QCM | QuestionType.VRAI_FAUX;
+  type: 'QCM' | 'VRAI_FAUX';
   options: SessionQuestionOption[];
 }
 
@@ -51,21 +53,21 @@ export interface SessionQcmQuestion extends BaseSessionQuestion {
  * Session TEXT question
  */
 export interface SessionTextQuestion extends BaseSessionQuestion {
-  type: QuestionType.TEXT;
+  type: 'TEXT';
 }
 
 /**
  * Session IMAGE question
  */
 export interface SessionImageQuestion extends BaseSessionQuestion {
-  type: QuestionType.IMAGE;
+  type: 'IMAGE';
 }
 
 /**
  * Session MATCHING question
  */
 export interface SessionMatchingQuestion extends BaseSessionQuestion {
-  type: QuestionType.MATCHING;
+  type: 'MATCHING';
 }
 
 /**

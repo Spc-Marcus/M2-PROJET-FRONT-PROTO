@@ -5,13 +5,15 @@
 /**
  * Question type enumeration
  */
-export enum QuestionType {
-  QCM = 'QCM',
-  VRAI_FAUX = 'VRAI_FAUX',
-  MATCHING = 'MATCHING',
-  IMAGE = 'IMAGE',
-  TEXT = 'TEXT'
-}
+export const QuestionType = {
+  QCM: 'QCM',
+  VRAI_FAUX: 'VRAI_FAUX',
+  MATCHING: 'MATCHING',
+  IMAGE: 'IMAGE',
+  TEXT: 'TEXT'
+} as const;
+
+export type QuestionType = typeof QuestionType[keyof typeof QuestionType];
 
 /**
  * Option for QCM or VRAI_FAUX questions
@@ -63,7 +65,7 @@ interface BaseQuestion {
  * QCM question
  */
 export interface QcmQuestion extends BaseQuestion {
-  type: QuestionType.QCM;
+  type: 'QCM';
   options: QuestionOption[];
 }
 
@@ -71,7 +73,7 @@ export interface QcmQuestion extends BaseQuestion {
  * VRAI_FAUX question
  */
 export interface VraiFauxQuestion extends BaseQuestion {
-  type: QuestionType.VRAI_FAUX;
+  type: 'VRAI_FAUX';
   options: QuestionOption[];
 }
 
@@ -79,7 +81,7 @@ export interface VraiFauxQuestion extends BaseQuestion {
  * MATCHING question
  */
 export interface MatchingQuestion extends BaseQuestion {
-  type: QuestionType.MATCHING;
+  type: 'MATCHING';
   matchingPairs: MatchingPair[];
 }
 
@@ -87,7 +89,7 @@ export interface MatchingQuestion extends BaseQuestion {
  * IMAGE question
  */
 export interface ImageQuestion extends BaseQuestion {
-  type: QuestionType.IMAGE;
+  type: 'IMAGE';
   imageZones: ImageZone[];
 }
 
@@ -95,7 +97,7 @@ export interface ImageQuestion extends BaseQuestion {
  * TEXT question
  */
 export interface TextQuestion extends BaseQuestion {
-  type: QuestionType.TEXT;
+  type: 'TEXT';
   textConfig: TextConfig;
 }
 
