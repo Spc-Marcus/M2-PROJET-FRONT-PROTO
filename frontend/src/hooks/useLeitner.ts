@@ -62,7 +62,7 @@ export const useFinishLeitnerSession = () => {
       queryClient.invalidateQueries({ queryKey: ['leitner', 'status'] });
       queryClient.invalidateQueries({ queryKey: ['statistics'] });
       queryClient.invalidateQueries({ queryKey: ['progress'] });
-      showSuccess(`Leitner session completed! Score: ${data.score}/${data.totalQuestions}`);
+      showSuccess(`Leitner session completed! Score: ${data.correctAnswers}/${data.totalQuestions}`);
     },
     onError: (error: any) => {
       showError(error?.response?.data?.message || 'Failed to finish Leitner session');

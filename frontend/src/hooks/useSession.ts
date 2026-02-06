@@ -48,7 +48,7 @@ export const useFinishSession = () => {
       queryClient.invalidateQueries({ queryKey: ['statistics'] });
       queryClient.invalidateQueries({ queryKey: ['progress'] });
       queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
-      showSuccess(`Session completed! Score: ${data.score}/${data.totalQuestions}`);
+      showSuccess(`Session completed! Score: ${data.totalScore}/${data.maxScore}`);
     },
     onError: (error: any) => {
       showError(error?.response?.data?.message || 'Failed to finish session');

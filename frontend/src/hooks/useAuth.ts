@@ -57,14 +57,18 @@ export const useGetMe = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const setUser = useAuthStore((state) => state.setUser);
 
-  return useQuery({
+  const query = useQuery({
     queryKey: ['auth', 'me'],
     queryFn: authService.getMe,
     enabled: isAuthenticated,
-    onSuccess: (data) => {
-      setUser(data);
-    },
   });
+
+  // Update user in store when data changes
+  if (query.data) {
+    setUser(query.data);
+  }
+
+  return query;
 };
 
 /**
