@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
  */
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('duobingo_token');
     
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -64,7 +64,8 @@ axiosInstance.interceptors.response.use(
 
     // Handle 401 Unauthorized
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('duobingo_token');
+      localStorage.removeItem('duobingo_user');
       window.location.href = '/login';
     }
 

@@ -1,19 +1,15 @@
 import { create } from 'zustand';
-import type { QuestionCreate } from '../types/question.types';
-
-export type QuestionDto = QuestionCreate & {
-  id: string;
-};
+import type { SessionQuestion } from '../types/session.types';
 
 interface SessionState {
   sessionId: string | null;
   quizId: string | null;
-  questions: QuestionDto[];
+  questions: SessionQuestion[];
   currentQuestionIndex: number;
   answers: Map<string, any>;
   startedAt: Date | null;
   timeElapsed: number;
-  startSession: (sessionId: string, quizId: string, questions: QuestionDto[]) => void;
+  startSession: (sessionId: string, quizId: string, questions: SessionQuestion[]) => void;
   setCurrentQuestion: (index: number) => void;
   saveAnswer: (questionId: string, answer: any) => void;
   nextQuestion: () => void;
@@ -31,7 +27,7 @@ export const useSessionStore = create<SessionState>((set) => ({
   startedAt: null,
   timeElapsed: 0,
 
-  startSession: (sessionId: string, quizId: string, questions: QuestionDto[]) => 
+  startSession: (sessionId: string, quizId: string, questions: SessionQuestion[]) => 
     set({
       sessionId,
       quizId,
