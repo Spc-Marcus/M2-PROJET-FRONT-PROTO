@@ -2,8 +2,8 @@
  * Leitner spaced repetition system types
  */
 
-import { QuestionType } from './question.types';
-import { SessionQuestionOption } from './session.types';
+import { type QuestionType } from './question.types';
+import { type SessionQuestionOption } from './session.types';
 
 /**
  * Leitner box information

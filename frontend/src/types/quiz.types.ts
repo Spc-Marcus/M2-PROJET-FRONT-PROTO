@@ -2,7 +2,7 @@
  * Quiz related types
  */
 
-import { UserSummary } from './user.types';
+import { type UserSummary } from './user.types';
 
 /**
  * Quiz information

@@ -2,8 +2,8 @@
  * Classroom and Module related types
  */
 
-import { UserSummary } from './user.types';
-import { Level } from './auth.types';
+import { type UserSummary } from './user.types';
+import { type Level } from './auth.types';
 
 /**
  * Classroom (course) information

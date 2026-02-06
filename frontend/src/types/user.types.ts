@@ -2,7 +2,7 @@
  * User related types
  */
 
-import { Role, Level } from './auth.types';
+import { type Role, type Level } from './auth.types';
 
 /**
  * Student profile information

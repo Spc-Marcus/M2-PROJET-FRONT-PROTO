@@ -2,7 +2,7 @@
  * Quiz session and gameplay types
  */
 
-import { QuestionType } from './question.types';
+import { type QuestionType } from './question.types';
 
 /**
  * Session status enumeration
