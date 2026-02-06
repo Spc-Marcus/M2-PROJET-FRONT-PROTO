@@ -101,7 +101,11 @@ export function Table<T = any>({
                 <input
                   type="checkbox"
                   checked={allSelected}
-                  ref={(el) => el && (el.indeterminate = someSelected)}
+                  ref={(el) => {
+                    if (el) {
+                      el.indeterminate = someSelected;
+                    }
+                  }}
                   onChange={handleSelectAll}
                   className="w-4 h-4 text-sky-500 border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-sky-500"
                 />

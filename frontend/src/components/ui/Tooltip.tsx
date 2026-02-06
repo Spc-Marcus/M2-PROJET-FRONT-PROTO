@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 /**
  * Tooltip component props
@@ -31,10 +31,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
   delay = 200,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<number | undefined>(undefined);
 
   const handleMouseEnter = () => {
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       setIsVisible(true);
     }, delay);
   };
@@ -45,6 +45,14 @@ export const Tooltip: React.FC<TooltipProps> = ({
     }
     setIsVisible(false);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const positionStyles = {
     top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
@@ -62,10 +70,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   return (
     <div className="relative inline-block">
-      {React.cloneElement(children, {
-        onMouseEnter: handleMouseEnter,
-        onMouseLeave: handleMouseLeave,
-      })}
+      <div
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="inline-block"
+      >
+        {children}
+      </div>
       {isVisible && (
         <div
           className={`absolute ${positionStyles[position]} z-50 pointer-events-none`}
